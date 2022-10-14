@@ -1,0 +1,44 @@
+openapi: 3.0.3
+info:
+  title: Jabcokeum
+  description: Jabcokeum
+  version: 1.0.0
+externalDocs:
+  description: Find out more about Jabcokeum
+  url: http://github.com/adamsiedlecki/jabcokeum
+servers:
+  - url: https://origin.jabcokeum.org
+
+tags:
+  - name: jabcokeum-net
+    description: Interface that allows nodes to connect with each other
+
+  - name: jabcokeum-client-interface
+    description: Interface that allows to receive requests from clients (sending & verifying transactions etc.)
+
+paths:
+  /jabcokeum/blockheight:
+    get:
+      tags:
+        - jabcokeum-net
+      summary: Get current height of blockchain
+      operationId: getHeightOfBlockchain
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BlockHeightResponse'
+
+components:
+  schemas:
+    BlockHeightResponse:
+      required:
+        - blockHeight
+      type: object
+      properties:
+        blockHeight:
+          type: integer
+          format: int64
+          example: 10
